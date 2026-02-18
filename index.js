@@ -36,11 +36,40 @@
 // process.stdout.write("Привет!!\n")
 // console.log(process.argv)
 
-console.log("start");
+// console.log("start");
 
-process.nextTick(() => {
-  console.log("nextTick");
+// process.nextTick(() => {
+//   console.log("nextTick");
+// });
+
+// console.log("end");
+
+const fs = require("fs");
+
+fs.readFile("text.txt", (err, data) => {
+  if (err) {
+    console.log("Ошибка чтения файла:", err.message)
+  } else {  
+  console.log("file read:", data.toString());
+  }
+
+  setImmediate(() => {
+    console.log("after IO!");
+  });
 });
 
-console.log("end");
+function printNumbers() {
+  for (let i = 1; i <= 10; i++) {
+    console.log(i);
+  }
+}
 
+printNumbers();
+
+function printRussianLetters() {
+  for (let i = 0x0410; i <= 0x042F; i++) {
+    console.log(String.fromCharCode(i));
+  }
+}
+
+printRussianLetters();
